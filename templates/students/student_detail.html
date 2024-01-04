@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Students Details</title>
+    <style>
+body{
+width:1400px;
+height :800px;
+background-image: url("https://slidescorner.com/wp-content/uploads/2022/08/02-Free-Spring-Floral-Background-1024x576.jpg");
+background-size:100% 100%;
+background-repeat:no-repeat;
+
+}
+p{
+font-family:Lato, sans-serif;
+font-size:20px;
+}
+#button1,#button2{
+background-color: purple;
+border:collapse;
+color: white;
+padding: 10px 10px;
+text-align: center;
+text-decoration: none;
+font-size: 16px;
+display: inline;
+border-radius:10px
+}
+
+    </style>
+</head>
+<body>
+<h1>Students Details</h1>
+<p> Student Name: {{student.name}} | <a href = "{% url 'students:student_update' student.id %}">Update</a>
+    <a href="{% url 'students:student_delete' student.id %}">Delete</a>
+</p>
+<p>Roll Number:{{student.roll_number}}</p>
+<p>Father Name:{{student.father_name}}</p>
+<p>Mother Name:{{student.mother_name}}</p>
+<p>Date of Birth:{{student.date_of_birth}}</p>
+<p>Contact Number:{{student.contact_number}}</p>
+<p>Date of admission:{{student.date}}</p>
+<p>Class:{{student.class_name}}</p>
+<p>address:{{student.address}}</p>
+<p>parent email:{{student.email}}</p>
+<br>
+
+<p>
+
+    <a style="margin-left:150px;" href="{% url 'students:student_list' %}" id="button1">Student list</a>
+    <a style="margin-left:100px;" href="{% url 'students:student_create' %}" id="button2">Register student</a>
+
+
+</p>
+</body>
+</html>
+

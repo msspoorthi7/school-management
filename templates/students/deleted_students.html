@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Deleted Students</title>
+</head>
+<style>
+            body{
+width:1400px;
+height :800px;
+background-image: url("https://slidescorner.com/wp-content/uploads/2022/08/02-Free-Spring-Floral-Background-1024x576.jpg");
+background-size:100% 100%;
+background-repeat:no-repeat;
+font-size:20px;
+color:black;
+</style>
+<body>
+    <h2>Deleted Students</h2>
+    <table border="1">
+        <tr>
+            <th>Sl no</th>
+            <th>Roll Number</th>
+            <th>Name</th>
+
+        </tr>
+        {% for student in deleted_students %}
+        <tr>
+            <td>{{ forloop.counter }}</td>
+            <td>{{ student.roll_number }}</td>
+            <td>{{ student.name }}</td>
+
+        </tr>
+        {% endfor %}
+    </table>
+</body>
+</html>

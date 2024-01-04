@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>View Attendance</title>
+    <style>
+         body{
+width:1400px;
+height :1600px;
+background-image: url("https://slidescorner.com/wp-content/uploads/2022/08/02-Free-Spring-Floral-Background-1024x576.jpg");
+background-size:100% 100%;
+background-repeat:no-repeat;
+font-size:20px;
+color:black;
+
+}
+#button1,#button2 {
+background-color:white;
+border:collapse;
+border-radius:5px;
+color: brown;
+padding: 5px 16px;
+text-align: center;
+text-decoration: none;
+display: inline;
+font-size: 17px;
+}
+
+
+td,th{
+    text-align:center;
+    padding: 10px; /* Increase the padding to 10 pixels on all sides */
+    width: 200px; /* Increase the width to 150 pixels */
+    font-size: 18px;
+}
+
+
+a{
+text-decoration:none;
+color: black;
+
+}
+
+    </style>
+</head>
+<body>
+    <h2 style="text-align:center;  text-decoration-line: underline;">View Attendance</h2>
+
+    <a href="{% url 'students:logout' %}"   ><h3 style="text-align:right;">Logout</h3></a>
+
+    <form method="get" action="{% url 'students:view_attendance' %}" >
+        <br>
+
+        <label for="month">Select Month:</label>
+        <select name="month" id="button2">
+            {% for month in unique_months %}
+                <option value="{{ month|date:'Y-m' }}" {% if month == selected_month %}selected{% endif %}>
+                    {{ month|date:"F Y" }}
+                </option>
+            {% endfor %}
+        </select>
+        <input type="submit" value="View Attendance" id="button1">
+    </form>
+    <br>
+<center>
+    <table border="1">
+        <tr>
+            <th>Student Name</th>
+            <th>Roll Number</th>
+            <th>Date</th>
+            <th>Status</th>
+        </tr>
+        {% for student in students %}
+            <tr>
+                <td>{{ student.name }}</td>
+                <td>{{ student.roll_number }}</td>
+                <td>
+                    {% for attendance in student.attendance_data %}
+                        {{ attendance.date|date:"d-m-Y" }}<br>
+                    {% endfor %}
+                </td>
+                <td>
+                    {% for attendance in student.attendance_data %}
+                        {{ attendance.status }}<br>
+                    {% endfor %}
+                </td>
+            </tr>
+        {% endfor %}
+    </table>
+    </center>
+</body>
+</html>

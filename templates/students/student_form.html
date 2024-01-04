@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{% if object %} Edit Student {% else %} Create New Student {% endif %}</title>
+    <style>
+
+    form input[type="text"], [type="date"],[type="email"]{
+        width: 200px; /* Adjust the width to your desired value */
+        height:23px;
+    }
+    body{
+width:1500px;
+height :900px;
+background-image: url("https://i.pinimg.com/564x/d1/d0/70/d1d070a8818a750102d1845f96cdefaf.jpg ");
+background-size:100% 100%;
+background-repeat:no-repeat;
+
+}
+
+h1{
+font-family:Lato, sans-serif;
+}
+
+#student{
+        background-color: rgba(255, 255, 255, 0.5);
+        #background-color:#e0e0ad;
+        color:#612210;
+        padding: 0px 20px;
+        border: 2px solid black;
+        border-radius: 5px;
+        font-size: 20px;
+        margin:10px
+        padding-right:10px
+        }
+
+
+.form3{
+    background-color: rgba(255, 255, 255, 0.5);
+    max-width: 460px;
+    margin-left:500px;
+    margin-top:0px;
+    padding: 45px;
+    text-align: justify;
+    box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
+}
+
+.button1 {
+background-color: purple;
+border: none;
+color: white;
+padding: 5px 10px;
+text-align: center;
+text-decoration: none;
+font-size: 16px;
+border-radius:15px
+}
+
+
+
+</style>
+
+</head>
+<body>
+<div class="form3">
+    <div id="student">
+<h2 style="text-align:center;">{% if object %} Edit Student {% else %} Register New Student {% endif %}</h2>
+<form action=" " method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    {{form.as_p}}
+    <center>
+    <p><input type="submit" class="button1" value="Submit" ></p>
+        </center>
+</form>
+    </div>
+</div>
+</body>
+</html>

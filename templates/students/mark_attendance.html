@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Mark Attendance</title>
+    <link rel="stylesheet" href="{% static 'css/style.css'%}">
+    <style>
+        body{
+width:1400px;
+height :800px;
+background-image: url("https://slidescorner.com/wp-content/uploads/2022/08/02-Free-Spring-Floral-Background-1024x576.jpg");
+background-size:100% 100%;
+background-repeat:no-repeat;
+font-size:20px;
+color:black;
+
+}
+#button2,#button3,#button1 {
+background-color: violet;
+border:collapse;
+border-radius:20px;
+color: black;
+padding: 10px 30px;
+text-align: center;
+text-decoration: none;
+display: inline;
+font-size: 18px;
+}
+    </style>
+</head>
+<body>
+    <h2 style="text-align:center;  text-decoration-line: underline;">Mark Attendance</h2>
+<h3 style="text-align:right;" ><a href="{% url 'students:logout' %}" >Logout</a></h3>
+    <form method="post" style="margin-left:50px;">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <input type="submit" value="Submit" id="button1">
+    </form>
+    <br>
+
+    <a style="margin-left:350px;" href="{% url 'students:view_attendance'%}" id="button2">View attendance</a><br><br>
+    <a style="margin-left:550px;" href="{% url 'students:student_attendance'%}" id="button3">Report attendance</a>
+
+
+
+    <script>
+        // JavaScript to handle selecting all students
+        document.querySelector('.select-all-checkbox').addEventListener('change', function() {
+            const checkboxes = document.querySelectorAll('.student-checkbox');
+            checkboxes.forEach(checkbox => {
+                checkbox.checked = !checkbox.checked; // Toggle the checkboxes
+            });
+        });
+    </script>
+
+</body>
+</html>
+

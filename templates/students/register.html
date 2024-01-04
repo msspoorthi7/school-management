@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Home</title>
+        <link rel="stylesheet" href="{% static 'css/style.css'%}">
+<style>
+body{
+width:1500px;
+height :800px;
+background-image: url("https://i.pinimg.com/564x/d1/d0/70/d1d070a8818a750102d1845f96cdefaf.jpg ");
+background-size:100% 100%;
+background-repeat:no-repeat;
+
+}
+.form2{
+    background: #FFFFFF;
+    max-width: 360px;
+    margin-left:500px;
+    margin-top:150px;
+    padding: 45px;
+    text-align: center;
+    box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
+  }
+</style>
+    <script>
+        function checkForm() {
+            var name = document.getElementById("name").value;
+            var email = document.getElementById("email").value;
+            var password = document.getElementById("pwd").value;
+            var confirmPwd = document.getElementById("confirmPwd").value;
+
+            if (name === "" || email === "" || password === "" || confirmPwd === "") {
+                alert("Please fill in all fields."); // This should display an alert message.
+                return false;
+            }
+
+            if (password !== confirmPwd) {
+                alert("Password and Confirm Password do not match!");
+                return false;
+            }
+            // Form submitted successfully, show the success message
+            alert("User registered successfully!");
+            return true;
+
+     }
+    </script>
+</head>
+<body>
+<div class="form2">
+<h1>Registration page</h1>
+
+<form action="" method="POST" onsubmit="return checkForm();">{% csrf_token %}
+    <input type="text" id="name" name="username" placeholder="Enter Username" ><br><br>
+    <input type="email" id="email" name="email"  placeholder="Enter Email" ><br><br>
+    <input type="password" id="pwd" name="password" placeholder="Enter Password" ><br><br>
+    <input type="password" id="confirmPwd" name="confirmPwd" placeholder="Confirm password"><br><br>
+
+    <button type="submit">Register</button>
+</form>
+</div>
+</body>
+</html>

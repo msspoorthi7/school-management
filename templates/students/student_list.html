@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en" xmlns="http://www.w3.org/1999/html">
+<head>
+    <meta charset="UTF-8">
+    <title>Student List</title>
+            <link rel="stylesheet" href="{% static 'css/style.css'%}">
+
+
+<style>
+body{
+width:1400px;
+height :800px;
+background-image: url("https://slidescorner.com/wp-content/uploads/2022/08/02-Free-Spring-Floral-Background-1024x576.jpg");
+background-size:100% 100%;
+background-repeat:no-repeat;
+
+}
+
+tbody tr:not(.visible) {
+  display: none;
+}
+
+
+#button1,#button2,#button3,#button4 {
+background-color: purple;
+border:collapse;
+color: white;
+padding: 10px 10px;
+text-align: center;
+text-decoration: none;
+font-size: 16px;
+display: inline;
+border-radius:10px
+}
+
+td,th{
+
+    padding: 5px; /* Increase the padding to 10 pixels on all sides */
+    width: 150px; /* Increase the width to 150 pixels */
+    font-size: 18px;
+}
+
+
+.custom-table {
+margin-left:45px;
+padding: 8px;
+}
+
+</style>
+</head>
+
+<body>
+<div class="background">
+<h1 style="text-align:center;">STUDENT LIST</h1>
+    <h3 style="text-align:left;">Hi,{{request.user}}</h3>
+    <center>
+<table class="custom-table" style="background-color: rgba(255, 255, 255, 0.5); " border="1">
+    <thead>
+    <tr>
+        <th>Sl no</th>
+        <th>Roll Number</th>
+        <th>Name</th>
+        <th>Father's Name</th>
+        <th>Mother's Name</th>
+        <th>Date of Birth</th>
+        <th>Contact Number</th>
+        <th>Date of admission</th>
+        <th>Class </th>
+        <th>Address</th>
+        <th>Parent Email</th>
+        <th colspan="2">Actions</th>
+    </tr>
+    </thead>
+    <tbody>
+    {% for student in students %}
+    <tr>
+        <td>{{ forloop.counter }}</td>
+        <td>{{student.roll_number}}</td>
+        <td>{{ student.name }}</td>
+        <td>{{ student.father_name }}</td>
+        <td>{{ student.mother_name }}</td>
+        <td>{{ student.date_of_birth }}</td>
+        <td>{{ student.contact_number }}</td>
+        <td>{{ student.date }}</td>
+        <td>{{ student.class_name }}</td>
+        <td>{{ student.address }}</td>
+        <td>{{student.email}}</td>
+
+
+        <td>
+            <a href="{% url 'students:student_update' student.id %}">Update</a>
+            </td>
+        <td>
+            <a href="{% url 'students:student_delete' student.id %}">Delete</a>
+        </td>
+    </tr>
+    {% endfor %}
+</tbody>
+</table>
+    </center>
+<br>
+    <center>
+<button id="next" type="button"  name="button">Next</button>
+<button id="prev" type="button"  name="button">Previous</button>
+    </center>
+<br>
+<br>
+    <br>
+<a style="margin-left:150px;" href="{% url 'students:student_create' %}" id="button1" >Add New Student</a>
+        <a style="margin-left:850px;" href="{% url 'students:mark_attendance'%}" id = "button4" >Mark attendance</a>
+<a style="margin-left:410px;" href="{% url 'students:logout' %}" id="button2">Logout</a>
+
+    <a style="margin-left:400px;" href="{% url 'students:deleted_students'%}" id = "button3">Deleted Students</a>
+
+
+    </div>
+
+
+
+
+
+<script>
+    const visible_rows = 5;
+    const table_rows = document.querySelectorAll('tbody tr');
+
+if (!document.querySelector('.active')) {
+  table_rows[0].classList.add('active');
+}
+
+function showRows() {
+  let active_row = document.querySelector('.active');
+
+  for (i = 0; i < table_rows.length; i++) {
+    table_rows[i].classList.remove('visible');
+  }
+
+  for (i = 0; i < visible_rows; i++) {
+
+    active_row.classList.add('visible');
+
+    if (active_row.nextElementSibling) {
+      active_row = active_row.nextElementSibling;
+    }
+  }
+}
+
+document.querySelector('#next').addEventListener('click', function() {
+  const active_row = document.querySelector('.active');
+  const active_index = active_row.rowIndex;
+
+  if (table_rows.length > active_index + visible_rows - 1) {
+    active_row.classList.remove('active');
+    table_rows[active_index + visible_rows - 1].classList.add('active');
+    showRows();
+  }
+});
+document.querySelector('#prev').addEventListener('click', function() {
+  const active_row = document.querySelector('.active');
+  const active_index = active_row.rowIndex;
+
+  if (active_index > 1) {
+    active_row.classList.remove('active');
+    table_rows[active_index - visible_rows - 1].classList.add('active');
+    showRows();
+  }
+});
+
+showRows();
+</script>
+
+
+    </div>
+</body>
+</html>
